@@ -23,6 +23,8 @@ if __name__ == '__main__':
     M = "start_scene"                                   # Mode
     TN = 0                                              # Text number
     T = time.time()
+    music = pygame.mixer.Sound('music.wav')
+    win_music = pygame.mixer.Sound('win_music.wav')
 
     # Init variables
     start_text = ["Мы засекли сигнал с планеты Мур.",
@@ -55,7 +57,6 @@ if __name__ == '__main__':
                 "орден 'Страж планеты Мур'.",
                 "А также несколько бутылок нашей",
                 "лучшей валерьянки.",
-                "",
                 ""]
     moods = ['start_scene', 
             'meteorites', 
@@ -87,12 +88,16 @@ if __name__ == '__main__':
             if M != 'final_scene':
                 M = moods[moods.index(M) + 1]
             else:
+                music.stop()
+                win_music.play()
                 G = False
             TN = 0
             T = time.time()
 
 
     # Create objects
+    music.play(-1)
+
     captain = Captain()
     alien = Alien()
     ship = Starship()
@@ -182,6 +187,7 @@ if __name__ == '__main__':
 
         if M == "final_scene":
             dialogue_mode(alien, final_text)
+            
 
         pygame.display.flip()
         C.tick(FPS)

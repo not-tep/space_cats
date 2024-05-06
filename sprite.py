@@ -3,6 +3,9 @@ import pygame
 from main import enemy_laser
 
 
+pygame.mixer.init()
+
+
 class Meteorite(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -47,10 +50,10 @@ class Laser(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load("laser.png")
-
         self.image = pygame.transform.scale(self.image, (30, 30))
-
         self.rect = self.image.get_rect(midbottom=pos)
+        self.voice = pygame.mixer.Sound('sound_laser.wav')
+        self.voice.play()
 
         self.speed = 2
     def update(self):
